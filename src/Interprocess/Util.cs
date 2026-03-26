@@ -18,8 +18,8 @@ internal static class Util
 
         try
         {
-            wine_get_version();
-            IsWine = true;
+            wine_get_host_version(out string sysname, out string release);
+            IsWine = (sysname == "Linux");
         }
         catch
         {
@@ -54,5 +54,5 @@ internal static class Util
     }
 
     [DllImport("ntdll.dll", CharSet = CharSet.Ansi)]
-    private static extern string wine_get_version();
+    private static extern void wine_get_host_version(out string sysname, out string release);
 }
